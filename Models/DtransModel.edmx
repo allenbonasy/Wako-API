@@ -1,0 +1,1734 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DtransModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscriberId" Type="int" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyTel" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyAdress" Type="nvarchar" MaxLength="100" />
+          <Property Name="CompanyLogo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Mode_Of_Transport" Type="nvarchar(max)" />
+          <Property Name="BankName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Account_Number" Type="ntext" />
+          <Property Name="Bank_Adress" Type="ntext" />
+          <Property Name="IDpic" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProofRes" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Agent_Post">
+          <Key>
+            <PropertyRef Name="Eng_PostId" />
+          </Key>
+          <Property Name="Eng_PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="int" />
+          <Property Name="PostId" Type="int" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Rec_Date" Type="date" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Agnt_Conf" Type="nvarchar" MaxLength="50" />
+          <Property Name="Poster_Conf" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="ChatRoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateCreated" Type="date" />
+          <Property Name="TimeCreated" Type="time" Precision="7" />
+          <Property Name="CreatorId" Type="int" />
+          <Property Name="CreatorIP" Type="nvarchar" MaxLength="50" />
+          <Property Name="RecipientID" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="HiddenChats">
+          <Key>
+            <PropertyRef Name="HiddenId" />
+          </Key>
+          <Property Name="HiddenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubsciberId" Type="int" />
+          <Property Name="ChatId" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="mapUrl" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PostID" Type="int" />
+          <Property Name="SenderID" Type="int" />
+          <Property Name="Recipient" Type="int" />
+          <Property Name="Message" Type="ntext" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="payment_requests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date_requested" Type="date" />
+          <Property Name="amount_paid" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="agent_id" Type="int" />
+          <Property Name="is_accepted" Type="nvarchar" MaxLength="50" />
+          <Property Name="is_paid" Type="nvarchar" MaxLength="50" />
+          <Property Name="authorised_by" Type="nvarchar" MaxLength="50" />
+          <Property Name="date_authorised" Type="date" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DatePosted" Type="date" />
+          <Property Name="TimePosted" Type="time" Precision="7" />
+          <Property Name="SubscriberId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fragility" Type="int" />
+          <Property Name="LocationToId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationFromId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PickUpPoint" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProposedFee" Type="float" />
+          <Property Name="DeliveryDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="900" />
+          <Property Name="ParcelPic" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddressTo" Type="nvarchar" MaxLength="100" />
+          <Property Name="AgentID" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PostsByAgent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="int" />
+          <Property Name="DatePosted" Type="nvarchar" MaxLength="150" />
+          <Property Name="PickUp" Type="nvarchar" MaxLength="150" />
+          <Property Name="LocationFrom" Type="nvarchar" MaxLength="150" />
+          <Property Name="LocationTo" Type="nvarchar" MaxLength="150" />
+          <Property Name="DepatureDate" Type="nvarchar" MaxLength="150" />
+          <Property Name="TransPort" Type="nvarchar" MaxLength="100" />
+          <Property Name="ETA" Type="nvarchar" MaxLength="100" />
+          <Property Name="Fragility" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProfileTypes">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VariableName" Type="nvarchar" MaxLength="250" />
+          <Property Name="VariableValue" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="ShopID" />
+          </Key>
+          <Property Name="ShopID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Shop_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Shop_Address" Type="ntext" />
+          <Property Name="Contact_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Contact_Person" Type="nvarchar" MaxLength="50" />
+          <Property Name="Logo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cover_Image" Type="nvarchar" MaxLength="50" />
+          <Property Name="Shop_Motto" Type="nvarchar" MaxLength="50" />
+          <Property Name="Shop_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Profile_Type" Type="int" />
+        </EntityType>
+        <EntityType Name="Shop_Centres">
+          <Key>
+            <PropertyRef Name="CentreId" />
+          </Key>
+          <Property Name="CentreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="ntext" />
+          <Property Name="Contact_Phone" Type="nchar" MaxLength="10" />
+          <Property Name="Account_Number" Type="ntext" />
+          <Property Name="Contact_Email" Type="nchar" MaxLength="10" />
+          <Property Name="ShopID" Type="int" />
+        </EntityType>
+        <EntityType Name="Shop_Subscription">
+          <Key>
+            <PropertyRef Name="SubscriptionID" />
+          </Key>
+          <Property Name="SubscriptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShopID" Type="int" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Time" Type="time" Precision="7" />
+          <Property Name="Balance" Type="float" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ShopItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Bar_Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unique_ID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_Updated" Type="date" />
+          <Property Name="ShopID" Type="int" />
+        </EntityType>
+        <EntityType Name="ShopLogin">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShopID" Type="int" />
+          <Property Name="UserEmail" Type="nchar" MaxLength="10" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Repeat_Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ShopTransaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date_Created" Type="date" />
+          <Property Name="Time_Created" Type="time" Precision="7" />
+          <Property Name="Reff_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pay_Method" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItemID" Type="int" />
+          <Property Name="SubscriberID" Type="int" />
+          <Property Name="Sub_Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="PollUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransactionFee" Type="float" />
+        </EntityType>
+        <EntityType Name="Subscriber">
+          <Key>
+            <PropertyRef Name="SubscriberId" />
+          </Key>
+          <Property Name="SubscriberId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RepeatPassword" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VerificationCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ProfilePic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="IDNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="ntext" />
+          <Property Name="DateRegistered" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="SystemUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PicUrl" Type="nvarchar" MaxLength="50" />
+          <Property Name="Post" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateRegistered" Type="date" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TagPays">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="ntext" />
+          <Property Name="MerchantId" Type="ntext" />
+          <Property Name="Client" Type="ntext" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="250" />
+          <Property Name="ReferenceId" Type="ntext" />
+          <Property Name="Result" Type="ntext" />
+          <Property Name="TransactionId" Type="ntext" />
+          <Property Name="SessionId" Type="ntext" />
+          <Property Name="SubscriberId" Type="int" />
+        </EntityType>
+        <EntityType Name="TransactionFee">
+          <Key>
+            <PropertyRef Name="transID" />
+          </Key>
+          <Property Name="transID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentID" Type="int" />
+          <Property Name="postID" Type="int" />
+          <Property Name="amount" Type="float" />
+          <Property Name="reff_Number" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Time" Type="time" Precision="7" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="PollURL" Type="ntext" />
+          <Property Name="paymentReff" Type="ntext" />
+          <Property Name="Hash" Type="ntext" />
+          <Property Name="Submitted" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentID" Type="int" />
+          <Property Name="Total" Type="nvarchar" MaxLength="50" />
+          <Property Name="Available" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pending" Type="nvarchar" MaxLength="50" />
+          <Property Name="Drawable" Type="nvarchar" MaxLength="50" />
+          <Property Name="Overal" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Agent_Post_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="Agent_Post" Type="Self.Agent_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="Agent_Post">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Post_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Agent_Post" Type="Self.Agent_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Agent_Post">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Subscriber">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="0..1" />
+          <End Role="Agent" Type="Self.Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="SubscriberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Wallet">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="Wallet" Type="Self.Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="Wallet">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoom_Subscriber">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="0..1" />
+          <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="ChatRoom">
+              <PropertyRef Name="RecipientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HiddenChats_ChatRoom">
+          <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="0..1" />
+          <End Role="HiddenChats" Type="Self.HiddenChats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChatRoom">
+              <PropertyRef Name="ChatRoomId" />
+            </Principal>
+            <Dependent Role="HiddenChats">
+              <PropertyRef Name="ChatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HiddenChats_Subscriber">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="0..1" />
+          <End Role="HiddenChats" Type="Self.HiddenChats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="HiddenChats">
+              <PropertyRef Name="SubsciberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Notifications">
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="1" />
+          <End Role="Notifications1" Type="Self.Notifications" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Notifications">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notifications1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Subscriber">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="0..1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="SenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_payment_requests_payment_requests">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="payment_requests" Type="Self.payment_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="payment_requests">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Subscriber">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="SubscriberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PostsByAgent_PostsByAgent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="0..1" />
+          <End Role="PostsByAgent" Type="Self.PostsByAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="PostsByAgent">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Centres_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="Shop_Centres" Type="Self.Shop_Centres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Shop_Centres">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_ProfileTypes">
+          <End Role="ProfileTypes" Type="Self.ProfileTypes" Multiplicity="0..1" />
+          <End Role="Shop" Type="Self.Shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileTypes">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Shop">
+              <PropertyRef Name="Profile_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Subscription_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="Shop_Subscription" Type="Self.Shop_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Shop_Subscription">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopItem_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="ShopItem" Type="Self.ShopItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="ShopItem">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopLogin_Shop">
+          <End Role="Shop" Type="Self.Shop" Multiplicity="0..1" />
+          <End Role="ShopLogin" Type="Self.ShopLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="ShopLogin">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopTransaction_ShopItem">
+          <End Role="ShopItem" Type="Self.ShopItem" Multiplicity="0..1" />
+          <End Role="ShopTransaction" Type="Self.ShopTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="ShopTransaction">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopTransaction_Subscriber">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="0..1" />
+          <End Role="ShopTransaction" Type="Self.ShopTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="ShopTransaction">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagPays_Subscriber">
+          <End Role="Subscriber" Type="Self.Subscriber" Multiplicity="0..1" />
+          <End Role="TagPays" Type="Self.TagPays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="TagPays">
+              <PropertyRef Name="SubscriberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DtransModelStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Agent_Post" EntityType="Self.Agent_Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoom" EntityType="Self.ChatRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HiddenChats" EntityType="Self.HiddenChats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="payment_requests" EntityType="Self.payment_requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PostsByAgent" EntityType="Self.PostsByAgent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileTypes" EntityType="Self.ProfileTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop" EntityType="Self.Shop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop_Centres" EntityType="Self.Shop_Centres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shop_Subscription" EntityType="Self.Shop_Subscription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopItem" EntityType="Self.ShopItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopLogin" EntityType="Self.ShopLogin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShopTransaction" EntityType="Self.ShopTransaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscriber" EntityType="Self.Subscriber" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemUsers" EntityType="Self.SystemUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TagPays" EntityType="Self.TagPays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionFee" EntityType="Self.TransactionFee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wallet" EntityType="Self.Wallet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Agent_Post_Agent" Association="Self.FK_Agent_Post_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Agent_Post" EntitySet="Agent_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Post_Post" Association="Self.FK_Agent_Post_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Agent_Post" EntitySet="Agent_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Subscriber" Association="Self.FK_Agent_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="Agent" EntitySet="Agent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Wallet" Association="Self.FK_Agent_Wallet">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="Wallet" EntitySet="Wallet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoom_Subscriber" Association="Self.FK_ChatRoom_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="ChatRoom" EntitySet="ChatRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HiddenChats_ChatRoom" Association="Self.FK_HiddenChats_ChatRoom">
+            <End Role="ChatRoom" EntitySet="ChatRoom" />
+            <End Role="HiddenChats" EntitySet="HiddenChats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HiddenChats_Subscriber" Association="Self.FK_HiddenChats_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="HiddenChats" EntitySet="HiddenChats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Notifications" Association="Self.FK_Notifications_Notifications">
+            <End Role="Notifications" EntitySet="Notifications" />
+            <End Role="Notifications1" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Post" Association="Self.FK_Notifications_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Subscriber" Association="Self.FK_Notifications_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_payment_requests_payment_requests" Association="Self.FK_payment_requests_payment_requests">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="payment_requests" EntitySet="payment_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Subscriber" Association="Self.FK_Post_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PostsByAgent_PostsByAgent" Association="Self.FK_PostsByAgent_PostsByAgent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="PostsByAgent" EntitySet="PostsByAgent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Centres_Shop" Association="Self.FK_Shop_Centres_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="Shop_Centres" EntitySet="Shop_Centres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_ProfileTypes" Association="Self.FK_Shop_ProfileTypes">
+            <End Role="ProfileTypes" EntitySet="ProfileTypes" />
+            <End Role="Shop" EntitySet="Shop" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Subscription_Shop" Association="Self.FK_Shop_Subscription_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="Shop_Subscription" EntitySet="Shop_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopItem_Shop" Association="Self.FK_ShopItem_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="ShopItem" EntitySet="ShopItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopLogin_Shop" Association="Self.FK_ShopLogin_Shop">
+            <End Role="Shop" EntitySet="Shop" />
+            <End Role="ShopLogin" EntitySet="ShopLogin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopTransaction_ShopItem" Association="Self.FK_ShopTransaction_ShopItem">
+            <End Role="ShopItem" EntitySet="ShopItem" />
+            <End Role="ShopTransaction" EntitySet="ShopTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopTransaction_Subscriber" Association="Self.FK_ShopTransaction_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="ShopTransaction" EntitySet="ShopTransaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagPays_Subscriber" Association="Self.FK_TagPays_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscriber" />
+            <End Role="TagPays" EntitySet="TagPays" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DtransModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DtransEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agents" EntityType="DtransModel.Agent" />
+          <EntitySet Name="Agent_Post" EntityType="DtransModel.Agent_Post" />
+          <EntitySet Name="ChatRooms" EntityType="DtransModel.ChatRoom" />
+          <EntitySet Name="HiddenChats" EntityType="DtransModel.HiddenChat" />
+          <EntitySet Name="Locations" EntityType="DtransModel.Location" />
+          <EntitySet Name="Notifications" EntityType="DtransModel.Notification" />
+          <EntitySet Name="Posts" EntityType="DtransModel.Post" />
+          <EntitySet Name="ProfileTypes" EntityType="DtransModel.ProfileType" />
+          <EntitySet Name="Settings" EntityType="DtransModel.Setting" />
+          <EntitySet Name="Shops" EntityType="DtransModel.Shop" />
+          <EntitySet Name="Shop_Centres" EntityType="DtransModel.Shop_Centres" />
+          <EntitySet Name="Shop_Subscription" EntityType="DtransModel.Shop_Subscription" />
+          <EntitySet Name="ShopItems" EntityType="DtransModel.ShopItem" />
+          <EntitySet Name="ShopLogins" EntityType="DtransModel.ShopLogin" />
+          <EntitySet Name="ShopTransactions" EntityType="DtransModel.ShopTransaction" />
+          <EntitySet Name="Subscribers" EntityType="DtransModel.Subscriber" />
+          <EntitySet Name="sysdiagrams" EntityType="DtransModel.sysdiagram" />
+          <EntitySet Name="SystemUsers" EntityType="DtransModel.SystemUser" />
+          <EntitySet Name="TagPays" EntityType="DtransModel.TagPay" />
+          <EntitySet Name="TransactionFees" EntityType="DtransModel.TransactionFee" />
+          <AssociationSet Name="FK_Agent_Post_Agent" Association="DtransModel.FK_Agent_Post_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Agent_Post" EntitySet="Agent_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Subscriber" Association="DtransModel.FK_Agent_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="Agent" EntitySet="Agents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Agent_Post_Post" Association="DtransModel.FK_Agent_Post_Post">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Agent_Post" EntitySet="Agent_Post" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoom_Subscriber" Association="DtransModel.FK_ChatRoom_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="ChatRoom" EntitySet="ChatRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HiddenChats_ChatRoom" Association="DtransModel.FK_HiddenChats_ChatRoom">
+            <End Role="ChatRoom" EntitySet="ChatRooms" />
+            <End Role="HiddenChat" EntitySet="HiddenChats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HiddenChats_Subscriber" Association="DtransModel.FK_HiddenChats_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="HiddenChat" EntitySet="HiddenChats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Post" Association="DtransModel.FK_Notifications_Post">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Subscriber" Association="DtransModel.FK_Notifications_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Post_Subscriber" Association="DtransModel.FK_Post_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_ProfileTypes" Association="DtransModel.FK_Shop_ProfileTypes">
+            <End Role="ProfileType" EntitySet="ProfileTypes" />
+            <End Role="Shop" EntitySet="Shops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Centres_Shop" Association="DtransModel.FK_Shop_Centres_Shop">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="Shop_Centres" EntitySet="Shop_Centres" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shop_Subscription_Shop" Association="DtransModel.FK_Shop_Subscription_Shop">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="Shop_Subscription" EntitySet="Shop_Subscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopItem_Shop" Association="DtransModel.FK_ShopItem_Shop">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="ShopItem" EntitySet="ShopItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopLogin_Shop" Association="DtransModel.FK_ShopLogin_Shop">
+            <End Role="Shop" EntitySet="Shops" />
+            <End Role="ShopLogin" EntitySet="ShopLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopTransaction_ShopItem" Association="DtransModel.FK_ShopTransaction_ShopItem">
+            <End Role="ShopItem" EntitySet="ShopItems" />
+            <End Role="ShopTransaction" EntitySet="ShopTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShopTransaction_Subscriber" Association="DtransModel.FK_ShopTransaction_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="ShopTransaction" EntitySet="ShopTransactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TagPays_Subscriber" Association="DtransModel.FK_TagPays_Subscriber">
+            <End Role="Subscriber" EntitySet="Subscribers" />
+            <End Role="TagPay" EntitySet="TagPays" />
+          </AssociationSet>
+          <EntitySet Name="PostsByAgents" EntityType="DtransModel.PostsByAgent" />
+          <AssociationSet Name="FK_PostsByAgent_PostsByAgent" Association="DtransModel.FK_PostsByAgent_PostsByAgent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="PostsByAgent" EntitySet="PostsByAgents" />
+          </AssociationSet>
+          <EntitySet Name="Wallets" EntityType="DtransModel.Wallet" />
+          <AssociationSet Name="FK_Agent_Wallet" Association="DtransModel.FK_Agent_Wallet">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="Wallet" EntitySet="Wallets" />
+          </AssociationSet>
+          <EntitySet Name="payment_requests" EntityType="DtransModel.payment_requests" />
+          <AssociationSet Name="FK_payment_requests_payment_requests" Association="DtransModel.FK_payment_requests_payment_requests">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="payment_requests" EntitySet="payment_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Notifications" Association="DtransModel.FK_Notifications_Notifications">
+            <End Role="Notification" EntitySet="Notifications" />
+            <End Role="Notification1" EntitySet="Notifications" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscriberId" Type="Int32" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyAdress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyLogo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mode_Of_Transport" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Account_Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Bank_Adress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent_Post" Relationship="DtransModel.FK_Agent_Post_Agent" FromRole="Agent" ToRole="Agent_Post" />
+          <NavigationProperty Name="Subscriber" Relationship="DtransModel.FK_Agent_Subscriber" FromRole="Agent" ToRole="Subscriber" />
+          <NavigationProperty Name="PostsByAgents" Relationship="DtransModel.FK_PostsByAgent_PostsByAgent" FromRole="Agent" ToRole="PostsByAgent" />
+          <Property Name="IDpic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProofRes" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Wallets" Relationship="DtransModel.FK_Agent_Wallet" FromRole="Agent" ToRole="Wallet" />
+          <NavigationProperty Name="payment_requests" Relationship="DtransModel.FK_payment_requests_payment_requests" FromRole="Agent" ToRole="payment_requests" />
+        </EntityType>
+        <EntityType Name="Agent_Post">
+          <Key>
+            <PropertyRef Name="Eng_PostId" />
+          </Key>
+          <Property Name="Eng_PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="Int32" />
+          <Property Name="PostId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Rec_Date" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Agnt_Conf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Poster_Conf" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent" Relationship="DtransModel.FK_Agent_Post_Agent" FromRole="Agent_Post" ToRole="Agent" />
+          <NavigationProperty Name="Post" Relationship="DtransModel.FK_Agent_Post_Post" FromRole="Agent_Post" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="TimeCreated" Type="Time" Precision="7" />
+          <Property Name="CreatorId" Type="Int32" />
+          <Property Name="CreatorIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RecipientID" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Subscriber" Relationship="DtransModel.FK_ChatRoom_Subscriber" FromRole="ChatRoom" ToRole="Subscriber" />
+          <NavigationProperty Name="HiddenChats" Relationship="DtransModel.FK_HiddenChats_ChatRoom" FromRole="ChatRoom" ToRole="HiddenChat" />
+        </EntityType>
+        <EntityType Name="HiddenChat">
+          <Key>
+            <PropertyRef Name="HiddenId" />
+          </Key>
+          <Property Name="HiddenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubsciberId" Type="Int32" />
+          <Property Name="ChatId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="ChatRoom" Relationship="DtransModel.FK_HiddenChats_ChatRoom" FromRole="HiddenChat" ToRole="ChatRoom" />
+          <NavigationProperty Name="Subscriber" Relationship="DtransModel.FK_HiddenChats_Subscriber" FromRole="HiddenChat" ToRole="Subscriber" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mapUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PostID" Type="Int32" />
+          <Property Name="SenderID" Type="Int32" />
+          <Property Name="Recipient" Type="Int32" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Post" Relationship="DtransModel.FK_Notifications_Post" FromRole="Notification" ToRole="Post" />
+          <NavigationProperty Name="Subscriber" Relationship="DtransModel.FK_Notifications_Subscriber" FromRole="Notification" ToRole="Subscriber" />
+          <NavigationProperty Name="Notifications1" Relationship="DtransModel.FK_Notifications_Notifications" FromRole="Notification" ToRole="Notification1" />
+          <NavigationProperty Name="Notification1" Relationship="DtransModel.FK_Notifications_Notifications" FromRole="Notification1" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="PostId" />
+          </Key>
+          <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DatePosted" Type="DateTime" Precision="0" />
+          <Property Name="TimePosted" Type="Time" Precision="7" />
+          <Property Name="SubscriberId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fragility" Type="Int32" />
+          <Property Name="LocationToId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LocationFromId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PickUpPoint" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProposedFee" Type="Double" />
+          <Property Name="DeliveryDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="900" FixedLength="false" Unicode="true" />
+          <Property Name="ParcelPic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressTo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent_Post" Relationship="DtransModel.FK_Agent_Post_Post" FromRole="Post" ToRole="Agent_Post" />
+          <NavigationProperty Name="Notifications" Relationship="DtransModel.FK_Notifications_Post" FromRole="Post" ToRole="Notification" />
+          <NavigationProperty Name="Subscriber" Relationship="DtransModel.FK_Post_Subscriber" FromRole="Post" ToRole="Subscriber" />
+          <Property Name="AgentID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProfileType">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Shops" Relationship="DtransModel.FK_Shop_ProfileTypes" FromRole="ProfileType" ToRole="Shop" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VariableName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="VariableValue" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Shop">
+          <Key>
+            <PropertyRef Name="ShopID" />
+          </Key>
+          <Property Name="ShopID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Shop_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Shop_Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Person" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cover_Image" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Shop_Motto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Shop_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Profile_Type" Type="Int32" />
+          <NavigationProperty Name="ProfileType" Relationship="DtransModel.FK_Shop_ProfileTypes" FromRole="Shop" ToRole="ProfileType" />
+          <NavigationProperty Name="Shop_Centres" Relationship="DtransModel.FK_Shop_Centres_Shop" FromRole="Shop" ToRole="Shop_Centres" />
+          <NavigationProperty Name="Shop_Subscription" Relationship="DtransModel.FK_Shop_Subscription_Shop" FromRole="Shop" ToRole="Shop_Subscription" />
+          <NavigationProperty Name="ShopItems" Relationship="DtransModel.FK_ShopItem_Shop" FromRole="Shop" ToRole="ShopItem" />
+          <NavigationProperty Name="ShopLogins" Relationship="DtransModel.FK_ShopLogin_Shop" FromRole="Shop" ToRole="ShopLogin" />
+        </EntityType>
+        <EntityType Name="Shop_Centres">
+          <Key>
+            <PropertyRef Name="CentreId" />
+          </Key>
+          <Property Name="CentreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Account_Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Contact_Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ShopID" Type="Int32" />
+          <NavigationProperty Name="Shop" Relationship="DtransModel.FK_Shop_Centres_Shop" FromRole="Shop_Centres" ToRole="Shop" />
+        </EntityType>
+        <EntityType Name="Shop_Subscription">
+          <Key>
+            <PropertyRef Name="SubscriptionID" />
+          </Key>
+          <Property Name="SubscriptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShopID" Type="Int32" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <Property Name="Balance" Type="Double" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Shop" Relationship="DtransModel.FK_Shop_Subscription_Shop" FromRole="Shop_Subscription" ToRole="Shop" />
+        </EntityType>
+        <EntityType Name="ShopItem">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Bar_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unique_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Updated" Type="DateTime" Precision="0" />
+          <Property Name="ShopID" Type="Int32" />
+          <NavigationProperty Name="Shop" Relationship="DtransModel.FK_ShopItem_Shop" FromRole="ShopItem" ToRole="Shop" />
+          <NavigationProperty Name="ShopTransactions" Relationship="DtransModel.FK_ShopTransaction_ShopItem" FromRole="ShopItem" ToRole="ShopTransaction" />
+        </EntityType>
+        <EntityType Name="ShopLogin">
+          <Key>
+            <PropertyRef Name="LoginID" />
+          </Key>
+          <Property Name="LoginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShopID" Type="Int32" />
+          <Property Name="UserEmail" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Repeat_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Shop" Relationship="DtransModel.FK_ShopLogin_Shop" FromRole="ShopLogin" ToRole="Shop" />
+        </EntityType>
+        <EntityType Name="ShopTransaction">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date_Created" Type="DateTime" Precision="0" />
+          <Property Name="Time_Created" Type="Time" Precision="7" />
+          <Property Name="Reff_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pay_Method" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemID" Type="Int32" />
+          <Property Name="SubscriberID" Type="Int32" />
+          <Property Name="Sub_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PollUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionFee" Type="Double" />
+          <NavigationProperty Name="ShopItem" Relationship="DtransModel.FK_ShopTransaction_ShopItem" FromRole="ShopTransaction" ToRole="ShopItem" />
+          <NavigationProperty Name="Subscriber" Relationship="DtransModel.FK_ShopTransaction_Subscriber" FromRole="ShopTransaction" ToRole="Subscriber" />
+        </EntityType>
+        <EntityType Name="Subscriber">
+          <Key>
+            <PropertyRef Name="SubscriberId" />
+          </Key>
+          <Property Name="SubscriberId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RepeatPassword" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VerificationCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProfilePic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateRegistered" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agents" Relationship="DtransModel.FK_Agent_Subscriber" FromRole="Subscriber" ToRole="Agent" />
+          <NavigationProperty Name="ChatRooms" Relationship="DtransModel.FK_ChatRoom_Subscriber" FromRole="Subscriber" ToRole="ChatRoom" />
+          <NavigationProperty Name="HiddenChats" Relationship="DtransModel.FK_HiddenChats_Subscriber" FromRole="Subscriber" ToRole="HiddenChat" />
+          <NavigationProperty Name="Notifications" Relationship="DtransModel.FK_Notifications_Subscriber" FromRole="Subscriber" ToRole="Notification" />
+          <NavigationProperty Name="Posts" Relationship="DtransModel.FK_Post_Subscriber" FromRole="Subscriber" ToRole="Post" />
+          <NavigationProperty Name="ShopTransactions" Relationship="DtransModel.FK_ShopTransaction_Subscriber" FromRole="Subscriber" ToRole="ShopTransaction" />
+          <NavigationProperty Name="TagPays" Relationship="DtransModel.FK_TagPays_Subscriber" FromRole="Subscriber" ToRole="TagPay" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SystemUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PicUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateRegistered" Type="DateTime" Precision="0" />
+          <Property Name="UserID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TagPay">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MerchantId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Client" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="Currency" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SessionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubscriberId" Type="Int32" />
+          <NavigationProperty Name="Subscriber" Relationship="DtransModel.FK_TagPays_Subscriber" FromRole="TagPay" ToRole="Subscriber" />
+        </EntityType>
+        <EntityType Name="TransactionFee">
+          <Key>
+            <PropertyRef Name="transID" />
+          </Key>
+          <Property Name="transID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentID" Type="Int32" />
+          <Property Name="postID" Type="Int32" />
+          <Property Name="amount" Type="Double" />
+          <Property Name="reff_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Time" Type="Time" Precision="7" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PollURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="paymentReff" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Submitted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Agent_Post_Agent">
+          <End Type="DtransModel.Agent" Role="Agent" Multiplicity="0..1" />
+          <End Type="DtransModel.Agent_Post" Role="Agent_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="Agent_Post">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Subscriber">
+          <End Type="DtransModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+          <End Type="DtransModel.Agent" Role="Agent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="Agent">
+              <PropertyRef Name="SubscriberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Agent_Post_Post">
+          <End Type="DtransModel.Post" Role="Post" Multiplicity="0..1" />
+          <End Type="DtransModel.Agent_Post" Role="Agent_Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Agent_Post">
+              <PropertyRef Name="PostId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoom_Subscriber">
+          <End Type="DtransModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+          <End Type="DtransModel.ChatRoom" Role="ChatRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="ChatRoom">
+              <PropertyRef Name="RecipientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HiddenChats_ChatRoom">
+          <End Type="DtransModel.ChatRoom" Role="ChatRoom" Multiplicity="0..1" />
+          <End Type="DtransModel.HiddenChat" Role="HiddenChat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChatRoom">
+              <PropertyRef Name="ChatRoomId" />
+            </Principal>
+            <Dependent Role="HiddenChat">
+              <PropertyRef Name="ChatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HiddenChats_Subscriber">
+          <End Type="DtransModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+          <End Type="DtransModel.HiddenChat" Role="HiddenChat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="HiddenChat">
+              <PropertyRef Name="SubsciberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Post">
+          <End Type="DtransModel.Post" Role="Post" Multiplicity="0..1" />
+          <End Type="DtransModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="PostId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="PostID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Subscriber">
+          <End Type="DtransModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+          <End Type="DtransModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Post_Subscriber">
+          <End Type="DtransModel.Subscriber" Role="Subscriber" Multiplicity="1" />
+          <End Type="DtransModel.Post" Role="Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="SubscriberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_ProfileTypes">
+          <End Type="DtransModel.ProfileType" Role="ProfileType" Multiplicity="0..1" />
+          <End Type="DtransModel.Shop" Role="Shop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileType">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Shop">
+              <PropertyRef Name="Profile_Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Centres_Shop">
+          <End Type="DtransModel.Shop" Role="Shop" Multiplicity="0..1" />
+          <End Type="DtransModel.Shop_Centres" Role="Shop_Centres" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Shop_Centres">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shop_Subscription_Shop">
+          <End Type="DtransModel.Shop" Role="Shop" Multiplicity="0..1" />
+          <End Type="DtransModel.Shop_Subscription" Role="Shop_Subscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="Shop_Subscription">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopItem_Shop">
+          <End Type="DtransModel.Shop" Role="Shop" Multiplicity="0..1" />
+          <End Type="DtransModel.ShopItem" Role="ShopItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="ShopItem">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopLogin_Shop">
+          <End Type="DtransModel.Shop" Role="Shop" Multiplicity="0..1" />
+          <End Type="DtransModel.ShopLogin" Role="ShopLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shop">
+              <PropertyRef Name="ShopID" />
+            </Principal>
+            <Dependent Role="ShopLogin">
+              <PropertyRef Name="ShopID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopTransaction_ShopItem">
+          <End Type="DtransModel.ShopItem" Role="ShopItem" Multiplicity="0..1" />
+          <End Type="DtransModel.ShopTransaction" Role="ShopTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShopItem">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="ShopTransaction">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShopTransaction_Subscriber">
+          <End Type="DtransModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+          <End Type="DtransModel.ShopTransaction" Role="ShopTransaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="ShopTransaction">
+              <PropertyRef Name="SubscriberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TagPays_Subscriber">
+          <End Type="DtransModel.Subscriber" Role="Subscriber" Multiplicity="0..1" />
+          <End Type="DtransModel.TagPay" Role="TagPay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscriber">
+              <PropertyRef Name="SubscriberId" />
+            </Principal>
+            <Dependent Role="TagPay">
+              <PropertyRef Name="SubscriberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PostsByAgent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="Int32" />
+          <Property Name="DatePosted" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PickUp" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LocationFrom" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="LocationTo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DepatureDate" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TransPort" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent" Relationship="DtransModel.FK_PostsByAgent_PostsByAgent" FromRole="PostsByAgent" ToRole="Agent" />
+          <Property Name="ETA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Fragility" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Weight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_PostsByAgent_PostsByAgent">
+          <End Type="DtransModel.Agent" Role="Agent" Multiplicity="0..1" />
+          <End Type="DtransModel.PostsByAgent" Role="PostsByAgent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="PostsByAgent">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Wallet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentID" Type="Int32" />
+          <Property Name="Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Available" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pending" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Drawable" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Overal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Agent" Relationship="DtransModel.FK_Agent_Wallet" FromRole="Wallet" ToRole="Agent" />
+        </EntityType>
+        <Association Name="FK_Agent_Wallet">
+          <End Type="DtransModel.Agent" Role="Agent" Multiplicity="0..1" />
+          <End Type="DtransModel.Wallet" Role="Wallet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="Wallet">
+              <PropertyRef Name="AgentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="payment_requests">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date_requested" Type="DateTime" Precision="0" />
+          <Property Name="amount_paid" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="agent_id" Type="Int32" />
+          <Property Name="is_accepted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="is_paid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="authorised_by" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="date_authorised" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Agent" Relationship="DtransModel.FK_payment_requests_payment_requests" FromRole="payment_requests" ToRole="Agent" />
+        </EntityType>
+        <Association Name="FK_payment_requests_payment_requests">
+          <End Type="DtransModel.Agent" Role="Agent" Multiplicity="0..1" />
+          <End Type="DtransModel.payment_requests" Role="payment_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="payment_requests">
+              <PropertyRef Name="agent_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Notifications">
+          <End Type="DtransModel.Notification" Role="Notification" Multiplicity="1" />
+          <End Type="DtransModel.Notification" Role="Notification1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Notification1">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DtransModelStoreContainer" CdmEntityContainer="DtransEntities">
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="DtransModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="ProofRes" ColumnName="ProofRes" />
+                <ScalarProperty Name="IDpic" ColumnName="IDpic" />
+                <ScalarProperty Name="Bank_Adress" ColumnName="Bank_Adress" />
+                <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="Mode_Of_Transport" ColumnName="Mode_Of_Transport" />
+                <ScalarProperty Name="CompanyLogo" ColumnName="CompanyLogo" />
+                <ScalarProperty Name="CompanyAdress" ColumnName="CompanyAdress" />
+                <ScalarProperty Name="CompanyTel" ColumnName="CompanyTel" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Agent_Post">
+            <EntityTypeMapping TypeName="DtransModel.Agent_Post">
+              <MappingFragment StoreEntitySet="Agent_Post">
+                <ScalarProperty Name="Poster_Conf" ColumnName="Poster_Conf" />
+                <ScalarProperty Name="Agnt_Conf" ColumnName="Agnt_Conf" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Rec_Date" ColumnName="Rec_Date" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Eng_PostId" ColumnName="Eng_PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRooms">
+            <EntityTypeMapping TypeName="DtransModel.ChatRoom">
+              <MappingFragment StoreEntitySet="ChatRoom">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RecipientID" ColumnName="RecipientID" />
+                <ScalarProperty Name="CreatorIP" ColumnName="CreatorIP" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+                <ScalarProperty Name="TimeCreated" ColumnName="TimeCreated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HiddenChats">
+            <EntityTypeMapping TypeName="DtransModel.HiddenChat">
+              <MappingFragment StoreEntitySet="HiddenChats">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+                <ScalarProperty Name="SubsciberId" ColumnName="SubsciberId" />
+                <ScalarProperty Name="HiddenId" ColumnName="HiddenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="DtransModel.Location">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="mapUrl" ColumnName="mapUrl" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="DtransModel.Notification">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+                <ScalarProperty Name="PostID" ColumnName="PostID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="DtransModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="AddressTo" ColumnName="AddressTo" />
+                <ScalarProperty Name="ParcelPic" ColumnName="ParcelPic" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="ProposedFee" ColumnName="ProposedFee" />
+                <ScalarProperty Name="PickUpPoint" ColumnName="PickUpPoint" />
+                <ScalarProperty Name="LocationFromId" ColumnName="LocationFromId" />
+                <ScalarProperty Name="LocationToId" ColumnName="LocationToId" />
+                <ScalarProperty Name="Fragility" ColumnName="Fragility" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+                <ScalarProperty Name="TimePosted" ColumnName="TimePosted" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="PostId" ColumnName="PostId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileTypes">
+            <EntityTypeMapping TypeName="DtransModel.ProfileType">
+              <MappingFragment StoreEntitySet="ProfileTypes">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="DtransModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="VariableValue" ColumnName="VariableValue" />
+                <ScalarProperty Name="VariableName" ColumnName="VariableName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shops">
+            <EntityTypeMapping TypeName="DtransModel.Shop">
+              <MappingFragment StoreEntitySet="Shop">
+                <ScalarProperty Name="Profile_Type" ColumnName="Profile_Type" />
+                <ScalarProperty Name="Shop_Email" ColumnName="Shop_Email" />
+                <ScalarProperty Name="Shop_Motto" ColumnName="Shop_Motto" />
+                <ScalarProperty Name="Cover_Image" ColumnName="Cover_Image" />
+                <ScalarProperty Name="Logo" ColumnName="Logo" />
+                <ScalarProperty Name="Contact_Person" ColumnName="Contact_Person" />
+                <ScalarProperty Name="Contact_Number" ColumnName="Contact_Number" />
+                <ScalarProperty Name="Shop_Address" ColumnName="Shop_Address" />
+                <ScalarProperty Name="Shop_Name" ColumnName="Shop_Name" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shop_Centres">
+            <EntityTypeMapping TypeName="DtransModel.Shop_Centres">
+              <MappingFragment StoreEntitySet="Shop_Centres">
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="Contact_Email" ColumnName="Contact_Email" />
+                <ScalarProperty Name="Account_Number" ColumnName="Account_Number" />
+                <ScalarProperty Name="Contact_Phone" ColumnName="Contact_Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CentreId" ColumnName="CentreId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shop_Subscription">
+            <EntityTypeMapping TypeName="DtransModel.Shop_Subscription">
+              <MappingFragment StoreEntitySet="Shop_Subscription">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="SubscriptionID" ColumnName="SubscriptionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopItems">
+            <EntityTypeMapping TypeName="DtransModel.ShopItem">
+              <MappingFragment StoreEntitySet="ShopItem">
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="Date_Updated" ColumnName="Date_Updated" />
+                <ScalarProperty Name="Unique_ID" ColumnName="Unique_ID" />
+                <ScalarProperty Name="Bar_Code" ColumnName="Bar_Code" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopLogins">
+            <EntityTypeMapping TypeName="DtransModel.ShopLogin">
+              <MappingFragment StoreEntitySet="ShopLogin">
+                <ScalarProperty Name="Repeat_Password" ColumnName="Repeat_Password" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="ShopID" ColumnName="ShopID" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShopTransactions">
+            <EntityTypeMapping TypeName="DtransModel.ShopTransaction">
+              <MappingFragment StoreEntitySet="ShopTransaction">
+                <ScalarProperty Name="TransactionFee" ColumnName="TransactionFee" />
+                <ScalarProperty Name="PollUrl" ColumnName="PollUrl" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Sub_Phone" ColumnName="Sub_Phone" />
+                <ScalarProperty Name="SubscriberID" ColumnName="SubscriberID" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="Pay_Method" ColumnName="Pay_Method" />
+                <ScalarProperty Name="Reff_Number" ColumnName="Reff_Number" />
+                <ScalarProperty Name="Time_Created" ColumnName="Time_Created" />
+                <ScalarProperty Name="Date_Created" ColumnName="Date_Created" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscribers">
+            <EntityTypeMapping TypeName="DtransModel.Subscriber">
+              <MappingFragment StoreEntitySet="Subscriber">
+                <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IDNumber" ColumnName="IDNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="VerificationCode" ColumnName="VerificationCode" />
+                <ScalarProperty Name="RepeatPassword" ColumnName="RepeatPassword" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DtransModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemUsers">
+            <EntityTypeMapping TypeName="DtransModel.SystemUser">
+              <MappingFragment StoreEntitySet="SystemUsers">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="DateRegistered" ColumnName="DateRegistered" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="PicUrl" ColumnName="PicUrl" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TagPays">
+            <EntityTypeMapping TypeName="DtransModel.TagPay">
+              <MappingFragment StoreEntitySet="TagPays">
+                <ScalarProperty Name="SubscriberId" ColumnName="SubscriberId" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="ReferenceId" ColumnName="ReferenceId" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="MerchantId" ColumnName="MerchantId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionFees">
+            <EntityTypeMapping TypeName="DtransModel.TransactionFee">
+              <MappingFragment StoreEntitySet="TransactionFee">
+                <ScalarProperty Name="Submitted" ColumnName="Submitted" />
+                <ScalarProperty Name="Hash" ColumnName="Hash" />
+                <ScalarProperty Name="paymentReff" ColumnName="paymentReff" />
+                <ScalarProperty Name="PollURL" ColumnName="PollURL" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="reff_Number" ColumnName="reff_Number" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="postID" ColumnName="postID" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="transID" ColumnName="transID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PostsByAgents">
+            <EntityTypeMapping TypeName="DtransModel.PostsByAgent">
+              <MappingFragment StoreEntitySet="PostsByAgent">
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Fragility" ColumnName="Fragility" />
+                <ScalarProperty Name="ETA" ColumnName="ETA" />
+                <ScalarProperty Name="TransPort" ColumnName="TransPort" />
+                <ScalarProperty Name="DepatureDate" ColumnName="DepatureDate" />
+                <ScalarProperty Name="LocationTo" ColumnName="LocationTo" />
+                <ScalarProperty Name="LocationFrom" ColumnName="LocationFrom" />
+                <ScalarProperty Name="PickUp" ColumnName="PickUp" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wallets">
+            <EntityTypeMapping TypeName="DtransModel.Wallet">
+              <MappingFragment StoreEntitySet="Wallet">
+                <ScalarProperty Name="Overal" ColumnName="Overal" />
+                <ScalarProperty Name="Drawable" ColumnName="Drawable" />
+                <ScalarProperty Name="Pending" ColumnName="Pending" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment_requests">
+            <EntityTypeMapping TypeName="DtransModel.payment_requests">
+              <MappingFragment StoreEntitySet="payment_requests">
+                <ScalarProperty Name="date_authorised" ColumnName="date_authorised" />
+                <ScalarProperty Name="authorised_by" ColumnName="authorised_by" />
+                <ScalarProperty Name="is_paid" ColumnName="is_paid" />
+                <ScalarProperty Name="is_accepted" ColumnName="is_accepted" />
+                <ScalarProperty Name="agent_id" ColumnName="agent_id" />
+                <ScalarProperty Name="amount_paid" ColumnName="amount_paid" />
+                <ScalarProperty Name="date_requested" ColumnName="date_requested" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

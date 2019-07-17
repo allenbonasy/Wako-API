@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a9404ecdaaff4d80b13f26e563e793f0" Name="Diagram1">
+        <EntityTypeShape EntityType="DtransModel.Agent" Width="1.5" PointX="3" PointY="25.375" />
+        <EntityTypeShape EntityType="DtransModel.Agent_Post" Width="1.5" PointX="5.25" PointY="22.75" />
+        <EntityTypeShape EntityType="DtransModel.ChatRoom" Width="1.5" PointX="3" PointY="29.375" />
+        <EntityTypeShape EntityType="DtransModel.HiddenChat" Width="1.5" PointX="8.25" PointY="21.75" />
+        <EntityTypeShape EntityType="DtransModel.Location" Width="1.5" PointX="5.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DtransModel.Notification" Width="1.5" PointX="5.25" PointY="17.625" />
+        <EntityTypeShape EntityType="DtransModel.Post" Width="1.5" PointX="3" PointY="19.875" />
+        <EntityTypeShape EntityType="DtransModel.ProfileType" Width="1.5" PointX="1.5" PointY="33.125" />
+        <EntityTypeShape EntityType="DtransModel.Setting" Width="1.5" PointX="5.75" PointY="5.625" />
+        <EntityTypeShape EntityType="DtransModel.Shop" Width="1.5" PointX="1.5" PointY="3.125" />
+        <EntityTypeShape EntityType="DtransModel.Shop_Centres" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DtransModel.Shop_Subscription" Width="1.5" PointX="3.75" PointY="33.5" />
+        <EntityTypeShape EntityType="DtransModel.ShopItem" Width="1.5" PointX="0.75" PointY="8.625" />
+        <EntityTypeShape EntityType="DtransModel.ShopLogin" Width="1.5" PointX="3.75" PointY="4.5" />
+        <EntityTypeShape EntityType="DtransModel.ShopTransaction" Width="1.5" PointX="3" PointY="14.25" />
+        <EntityTypeShape EntityType="DtransModel.Subscriber" Width="1.5" PointX="0.75" PointY="13.625" />
+        <EntityTypeShape EntityType="DtransModel.sysdiagram" Width="1.5" PointX="5.75" PointY="8.625" />
+        <EntityTypeShape EntityType="DtransModel.SystemUser" Width="1.5" PointX="7.75" PointY="2.625" />
+        <EntityTypeShape EntityType="DtransModel.TagPay" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="DtransModel.TransactionFee" Width="1.5" PointX="7.75" PointY="5.625" />
+        <AssociationConnector Association="DtransModel.FK_Agent_Post_Agent" />
+        <AssociationConnector Association="DtransModel.FK_Agent_Subscriber" />
+        <AssociationConnector Association="DtransModel.FK_Agent_Post_Post" />
+        <AssociationConnector Association="DtransModel.FK_ChatRoom_Subscriber" />
+        <AssociationConnector Association="DtransModel.FK_HiddenChats_ChatRoom" />
+        <AssociationConnector Association="DtransModel.FK_HiddenChats_Subscriber" />
+        <AssociationConnector Association="DtransModel.FK_Notifications_Post" />
+        <AssociationConnector Association="DtransModel.FK_Notifications_Subscriber" />
+        <AssociationConnector Association="DtransModel.FK_Post_Subscriber" />
+        <AssociationConnector Association="DtransModel.FK_Shop_ProfileTypes" />
+        <AssociationConnector Association="DtransModel.FK_Shop_Centres_Shop" />
+        <AssociationConnector Association="DtransModel.FK_Shop_Subscription_Shop" />
+        <AssociationConnector Association="DtransModel.FK_ShopItem_Shop" />
+        <AssociationConnector Association="DtransModel.FK_ShopLogin_Shop" />
+        <AssociationConnector Association="DtransModel.FK_ShopTransaction_ShopItem" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.25" PointY="10.006952754681549" />
+          <ConnectorPoint PointX="2.3219174497240798" PointY="10.271868376996208" />
+          <ConnectorPoint PointX="2.3655825502759211" PointY="10.432713447705806" />
+          <ConnectorPoint PointX="2.5189008664984578" PointY="10.997477872892732" />
+          <ConnectorPoint PointX="2.5189008664984578" PointY="11.159801028234808" />
+          <ConnectorPoint PointX="2.65625" PointY="11.534236185518639" />
+          <ConnectorPoint PointX="2.65625" PointY="11.749587341346153" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="11.749587341346153" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="11.749587341346153" />
+          <ConnectorPoint PointX="6.3020833333333339" PointY="11.749587341346153" />
+          <ConnectorPoint PointX="4.9073822743584561" PointY="15.056679977736797" />
+          <ConnectorPoint PointX="4.8426177256415439" PointY="15.210248630160633" />
+          <ConnectorPoint PointX="4.5" PointY="16.022658250326032" />
+        </AssociationConnector>
+        <AssociationConnector Association="DtransModel.FK_ShopTransaction_Subscriber" />
+        <AssociationConnector Association="DtransModel.FK_TagPays_Subscriber" />
+        <EntityTypeShape EntityType="DtransModel.PostsByAgent" Width="1.5" PointX="5.25" PointY="26.75" />
+        <AssociationConnector Association="DtransModel.FK_PostsByAgent_PostsByAgent" />
+        <EntityTypeShape EntityType="DtransModel.Wallet" Width="1.5" PointX="5.25" PointY="37.125" />
+        <AssociationConnector Association="DtransModel.FK_Agent_Wallet" />
+        <EntityTypeShape EntityType="DtransModel.payment_requests" Width="1.5" PointX="5.25" PointY="13.125" />
+        <AssociationConnector Association="DtransModel.FK_payment_requests_payment_requests" />
+        <AssociationConnector Association="DtransModel.FK_Notifications_Notifications" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
