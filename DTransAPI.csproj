@@ -216,6 +216,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocationsController.cs" />
     <Compile Include="Controllers\NotificationsController.cs" />
+    <Compile Include="Controllers\PasswordHasher.cs" />
     <Compile Include="Controllers\PaymentRequestsController.cs" />
     <Compile Include="Controllers\PostsByAgentsController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Models\Location.cs">
       <DependentUpon>DtransModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginObject.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Notification.cs">
       <DependentUpon>DtransModel.tt</DependentUpon>

@@ -19,33 +19,31 @@ namespace DTransAPI.Controllers
     public class SubscribersController : ApiController
     {
         private DtransEntities db = new DtransEntities();
+        PasswordHasher passwordHasher = new PasswordHasher();
 
         // GET: api/Subscribers
         public IQueryable<Subscriber> GetSubscribers()
         {
             List<Subscriber> allSubs = new List<Subscriber>();
-
-
-            foreach (Subscriber item in db.Subscribers.ToList())
+            foreach (Subscriber subscriber in db.Subscribers.ToList())
             {
-                allSubs.Add(new Subscriber {
-                  
-                    VerificationCode=item.VerificationCode,
-                    Surname=item.Surname,
-                    SubscriberId=item.SubscriberId,
-                    Status=item.Status,
-                    Password=item.Password,
-                    ProfilePic=item.ProfilePic,
-                    Phone=item.Phone,
-                    Name=item.Name,
-                   RepeatPassword=item.RepeatPassword,
-                    IDNumber=item.IDNumber,
-                 
-                    DateRegistered=item.DateRegistered,
-                    Email=item.Email,
-                    HiddenChats=item.HiddenChats,
-                Address=item.Address
-                });
+                new Subscriber {
+                    Address = subscriber.Address,
+                    DateRegistered = subscriber.DateRegistered,
+                    Email = subscriber.Email,
+                    IDNumber = subscriber.IDNumber,
+                    Name = subscriber.Name,
+                    Password = subscriber.Password,
+                    Phone = subscriber.Phone,
+                    RepeatPassword = subscriber.RepeatPassword,
+                    ProfilePic = subscriber.ProfilePic,
+                    Status = subscriber.Status,
+                    SubscriberId = subscriber.SubscriberId,
+                    Surname = subscriber.Surname,
+                    upload = subscriber.upload,
+                    VerificationCode= subscriber.VerificationCode
+                };
+                allSubs.Add(subscriber);
             }
             return allSubs.AsQueryable();
         }
@@ -59,27 +57,9 @@ namespace DTransAPI.Controllers
             {
                 return NotFound();
             }
-            Subscriber s = new Subscriber {
-              
-                VerificationCode = item.VerificationCode,
-                Surname = item.Surname,
-                SubscriberId = item.SubscriberId,
-                Status = item.Status,
-                Password = item.Password,
-                ProfilePic = item.ProfilePic,
-                Phone = item.Phone,
-                Name = item.Name,
-                IDNumber = item.IDNumber,
-             
-                DateRegistered = item.DateRegistered,
-                Email = item.Email,
-                HiddenChats = item.HiddenChats,
 
-                Address = item.Address
-            
-            };
 
-           return Json(s);
+           return Json(item);
         }
 
 
@@ -135,35 +115,9 @@ namespace DTransAPI.Controllers
                             Password = "tongayisithole"
                         };
                         smtp.Credentials = credential;
-                        if (sub.Email.Contains("@outlook.com"))
-                        {
-                            smtp.Host = "smtp-mail.outlook.com";
-                            smtp.Port = 587;
-                        }
-
-                        else if (sub.Email.Contains("@yahoo.com"))
-                        {
-                            smtp.Host = "smtp.mail.yahoo.com";
-                            smtp.Port = 465;
-                        }
-                        else if (sub.Email.Contains("@gmail.com"))
-                        {
                             smtp.Host = "smtp.gmail.com";
                             smtp.Port = 587;
-
                             smtp.EnableSsl = true;
-                        }
-                        else if (sub.Email.Contains("@afrosoft.co.zw"))
-                        {
-
-                            smtp.Host = "smtp.office365.com";
-                            smtp.Port = 587;
-
-                            smtp.EnableSsl = true;
-                        }
-
-
-
                         smtp.Send(message);
                         check = sub.VerificationCode;
 
@@ -178,19 +132,20 @@ namespace DTransAPI.Controllers
               return check;
           }
 
-
-
-
-
-
         // PUT: api/Subscribers/5
         [ResponseType(typeof(void))]
         public string PutSubscriber(int id, Subscriber subscriber)
         {
             DtransEntities dbP = new DtransEntities();
-         
+            if (subscriber.Password != subscriber.RepeatPassword)
+            {
+                return "passwords are not matching";
+            }
 
-       if(subscriber!=null && subscriber.upload!=null)
+            subscriber.Password = passwordHasher.base64Encode(subscriber.Password);
+            subscriber.RepeatPassword = subscriber.Password;
+
+            if (subscriber!=null && subscriber.upload!=null)
        {
            subscriber.ProfilePic = PostProfile(subscriber.upload);
        }
@@ -198,14 +153,20 @@ namespace DTransAPI.Controllers
 
 
        String message = "";
-
+            Subscriber sub = dbP.Subscribers.Find(id);
+            if (sub == null)
+            {
+                return "User not found";
+            }
+           
        try
        {
+           // subscriber.SubscriberId = sub.SubscriberId;
+           subscriber.DateRegistered = sub.DateRegistered;
+           db.Entry(subscriber).State = EntityState.Modified;
 
-           dbP.Entry(subscriber).State = EntityState.Modified;
 
-
-           dbP.SaveChanges();
+           db.SaveChanges();
            message = "Updated_" + subscriber.ProfilePic;
        }
        catch (Exception e)
@@ -226,12 +187,29 @@ namespace DTransAPI.Controllers
             {
                 return "failed";
             }
+
+            int subscribers = db.Subscribers.Where(s => s.Email == obj.Email).Count();
+            if (subscribers > 0)
+            {
+                return  "email already exists";
+            }
+            int numberCount = db.Subscribers.Where(s => s.Phone == obj.Phone).Count();
+            if (numberCount > 0)
+            {
+                return "phone number already exists";
+            }
+            if (obj.Password != obj.RepeatPassword)
+            {
+                return "passwords are not matching";
+            }
+
+
             Random r = new Random();
            
         
             obj.DateRegistered = DateTime.Now.Date.ToString();
+            obj.Password = passwordHasher.base64Encode(obj.Password);
             obj.RepeatPassword = obj.Password;
-         
             obj.VerificationCode = "" +DateTime.Now.Year+r.Next(400);
           
             string message = "";
@@ -302,32 +280,31 @@ namespace DTransAPI.Controllers
                    Password = "tongayisithole"
                };
                smtp.Credentials = credential;
-                    if (email.Contains("@outlook.com"))
-                    {
-                        smtp.Host = "smtp-mail.outlook.com";
-                        smtp.Port = 587;
-                    }
+                    //if (email.Contains("@outlook.com"))
+                    //{
+                    //    smtp.Host = "smtp-mail.outlook.com";
+                    //    smtp.Port = 587;
+                    //}
               
-                    else if (email.Contains("@yahoo.com"))
-                    {
-                        smtp.Host = "smtp.mail.yahoo.com";
-                        smtp.Port = 465;
-                    }
-                    else if (email.Contains("@gmail.com"))
-                    {
+                    //else if (email.Contains("@yahoo.com"))
+                    //{
+                    //    smtp.Host = "smtp.mail.yahoo.com";
+                    //    smtp.Port = 465;
+                    //}
+                    //else if (email.Contains("@gmail.com"))
+                    //{
                         smtp.Host = "smtp.gmail.com";
                         smtp.Port = 587;
-
                         smtp.EnableSsl = true;
-                    }
-                    else if (email.Contains("@afrosoft.co.zw"))
-                    {
+                    //}
+                    //else if (email.Contains("@afrosoft.co.zw"))
+                    //{
                        
-                        smtp.Host = "smtp.office365.com";
-                        smtp.Port = 587;
+                    //    smtp.Host = "smtp.office365.com";
+                    //    smtp.Port = 587;
 
-                        smtp.EnableSsl = true;
-                    }
+                    //    smtp.EnableSsl = true;
+                    //}
 
 
 
@@ -345,7 +322,18 @@ namespace DTransAPI.Controllers
        return check;
    }
 
-
+        [HttpPost, Route("api/login")]
+        [ResponseType(typeof(Subscriber))]
+        public IHttpActionResult LoginSubscriber(LoginObject loginObject)
+        {
+            loginObject.password = passwordHasher.base64Encode(loginObject.password);
+            Subscriber subscriber = db.Subscribers.FirstOrDefault(s=>s.Password==loginObject.password && s.Email==loginObject.email);
+            if (subscriber == null)
+            {
+                return NotFound();
+            }
+            return Ok(subscriber);
+        }
 
 
         protected override void Dispose(bool disposing)
@@ -362,4 +350,8 @@ namespace DTransAPI.Controllers
             return db.Subscribers.Count(e => e.SubscriberId == id) > 0;
         }
     }
+
+
+
+
 }
